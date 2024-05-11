@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="content-gen">
+        <h1>Lista de Contactos</h1>
+        <form action="/proceso-add" method="post">
+            <input type="text" placeholder="Ingrese su nombre" name="nombre" required><br>
+            <input type="text" placeholder="Ingrese su telefono" name="telefono" required><br>
+            <input type="email" placeholder="Ingrese su email" name="email" value="No Tiene"><br>
+            <input type="text" placeholder=" ingrese su numero de casa" value="DEFAULT" name="hogar"><br>
+            <input type="text" placeholder=" ingrese su direccion" name="direccion" value="No Tiene"><br>
+            <button type="submit">Añadir contacto</button><br>
+        </form>
+
+        <div class="content-listado">
+            <h2>DATOS DE LOS CONTACTOS</h2>
+            <% data.forEach(function(row) { %>
+            <tr>
+                <td><%= row.nombre %></td><br>
+                <td><%= row.telefono %></td><br>
+                <td><%= row.email %></td><br>
+                <td><%= row.hogar %></td><br>
+                <td><%= row.direccion %></td><br>
+            </tr><br>
+            <form action="/proceso-delete" method="post">
+                <input class="ocultar-input" type="text" value="<%= row.id %>" name="contactoID">
+                <button type="submit">eliminar</button>
+            </form>
+            <button class="btn-actualizador" id="btnshow">actualizar</button>
+            <div class="form-actualizar" id="actualizar">
+                <form action="/proceso-update" method="post">
+                    <input type="text" placeholder="Ingrese su nombre" value="<%= row.nombre %>" name="nombre" required><br>
+                    <input type="text" placeholder="Ingrese su telefono" value="<%= row.telefono %>" name="telefono" required><br>
+                    <input type="email" placeholder="Ingrese su email" value="<%= row.email %>" name="email" ><br>
+                    <input type="text" placeholder=" ingrese su numero de casa" value="<%= row.hogar %>" name="hogar"><br>
+                    <input type="text" placeholder=" ingrese su direccion" value="<%= row.direccion %>" name="direccion" ><br>
+                    <input class="ocultar-input"  type="text" value="<%= row.id %>" name="contactoID">
+                    <button type="submit">Actualizar contacto</button><br>
+                </form>
+            </div><br><br>
+            
+            <% }); %>
+        </div>
+    </div>
+    <script src="/js/main.js"></script>
+</body>
+</html>
